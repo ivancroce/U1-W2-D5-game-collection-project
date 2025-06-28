@@ -68,7 +68,7 @@ public class Application {
                 default:
                     System.err.println("Invalid option. Please try again.");
             }
-            } catch(InputMismatchException e) {
+            } catch(NumberFormatException e) {
                 System.out.println("Error: you must enter a number. Please try again.");
             } catch(Exception e) {
                 // to catch all other Exceptions
