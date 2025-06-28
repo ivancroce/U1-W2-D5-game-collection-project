@@ -17,8 +17,8 @@ public class BoardGame extends Game{
     }
 
     public void setNumberOfPlayers(int numberOfPlayers) {
-        if(numberOfPlayers <= 0) {
-            throw new IllegalArgumentException("Number of Players, must be a positive number.");
+        if(numberOfPlayers < 2 || numberOfPlayers > 10) {
+            throw new IllegalArgumentException("Number of Players, must be between 2 and 10.");
         }
         this.numberOfPlayers = numberOfPlayers;
     }

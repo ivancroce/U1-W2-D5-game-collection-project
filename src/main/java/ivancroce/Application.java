@@ -7,6 +7,7 @@ import ivancroce.entities.VideoGame;
 import ivancroce.enums.Genre;
 import ivancroce.enums.Platform;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class Application {
     public static void main(String[] args) {
 
         loadGames();
-        // collection.printGameCollection();
+        collection.printGameCollection();
 
         boolean running = true;
 
@@ -30,36 +31,34 @@ public class Application {
 
             switch(choice) {
                 case 1:
-                    // addGame();
-                    System.out.println("test case 1");
+                    addNewGame();
                     break;
                 case 2:
                     // findById();
                     System.out.println("test case 2");
                     break;
                 case 3:
-                    // findById();
+                    // findByPriceLessThan();
                     System.out.println("test case 3");
                     break;
                 case 4:
-                    // findById();
+                    // findBoardGamesByNumberOfPlayers();
                     System.out.println("test case 4");
                     break;
                 case 5:
-                    // findById();
+                    // removeById();
                     System.out.println("test case 5");
                     break;
                 case 6:
-                    // findById();
+                    // updateGameById();
                     System.out.println("test case 6");
                     break;
                 case 7:
-                    // findById();
+                    // printStats();
                     System.out.println("test case 7");
                     break;
                 case 8:
-                    // findById();
-                    System.out.println("test case 8");
+                    collection.printGameCollection();
                     break;
                 case 0:
                     // exit;
@@ -81,6 +80,7 @@ public class Application {
     }
 
     private static void loadGames() {
+        System.out.println("*****************************************");
         System.out.println("--- Loading Games... ---");
         try {
             collection.addGame(new VideoGame("VG01", "The Witcher 3", 2015, 29.99, Platform.PC, Genre.RPG, 150));
@@ -98,7 +98,7 @@ public class Application {
     }
 
     private static void showMenu() {
-        System.out.println("--------------------");
+        System.out.println("*****************************************");
         System.out.println("--- Game Collection Menu ---");
         System.out.println("1. Add a new game");
         System.out.println("2. Find a game by ID");
@@ -109,6 +109,62 @@ public class Application {
         System.out.println("7. Show statistics");
         System.out.println("8. Show the entire games collection");
         System.out.println("0. Exit");
-        System.out.println("--------------------");
+        System.out.println("*****************************************");
+    }
+
+    private static void addNewGame() {
+        System.out.println("--- Add a new game ---");
+        System.out.println("Select the type of game to add: (1.Video game, 2.Board game): ");
+
+        int type = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter Unique ID: ");
+        String id = scanner.nextLine();
+
+        System.out.print("Enter Title: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Enter Publication Year: ");
+        int year = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Enter Price: ");
+        double price = Double.parseDouble(scanner.nextLine());
+
+        if (type == 1) {
+            System.out.println("Available Platforms: " + Arrays.toString(Platform.values()));
+            System.out.println("Enter Platform: ");
+
+            // Type value = Type.valueOf(scanner.nextLine().toUpperCase()); thanks stackoverflow 💻
+            Platform platform = Platform.valueOf(scanner.nextLine().toUpperCase());
+
+            System.out.println("Available genres: " + Arrays.toString(Genre.values()));
+            System.out.println("Enter Genre: ");
+            Genre genre = Genre.valueOf(scanner.nextLine().toUpperCase());
+
+            System.out.println("Enter Playtime (in hours): ");
+            int playtime = Integer.parseInt(scanner.nextLine());
+
+            // creating new obj vg
+            VideoGame vg = new VideoGame(id, title, year, price, platform, genre, playtime);
+
+            collection.addGame(vg); // / using addGame from GameCollection's methods
+        } else if (type == 2) {
+            System.out.println("Enter number of players (e.g., 2-10): ");
+
+            int players = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Enter Average Playtime (in minutes): ");
+            int duration = Integer.parseInt(scanner.nextLine());
+
+            // creating new obj bg
+            BoardGame bg = new BoardGame(id, title, year, price, players, duration);
+
+            collection.addGame(bg); // using addGame from GameCollection's methods
+        } else {
+            System.out.println("Invalid type selected.");
+            return;
+        }
+
+        System.out.println("Game added successfully to the collection!");
     }
 }
