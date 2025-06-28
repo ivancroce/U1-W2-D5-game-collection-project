@@ -8,7 +8,7 @@ import java.util.*;
 
 public class GameCollection {
     // implementing a Map, to avoid double keys (id).
-    public static Map<String, Game> games = new HashMap<>();
+    private static final Map<String, Game> games = new HashMap<>();
 
     // Methods
     // 1. addGame(), if a game has the same ID, throw a DuplicateGameException.
@@ -20,7 +20,7 @@ public class GameCollection {
     }
 
     // 2. findById(), returns the foundGame if present.
-    public static Game findById(String id) {
+    public Game findById(String id) {
         // get() returns the value from that key, or null if the key is not present.
     Game foundGame = games.get(id);
 
@@ -31,12 +31,12 @@ public class GameCollection {
     }
 
     // 3. findByPriceLessThan(), finds and returns a list of games with a price less than (maxPrice).
-    public static List<Game> findByPriceLessThan(double maxPrice) {
+    public List<Game> findByPriceLessThan(double maxPrice) {
         return games.values().stream().filter(g -> g.getPrice() < maxPrice).toList();
     }
 
     // 4. findBoardGamesByNumberOfPlayers(), finds and returns a list of board games that support a specific number of players.
-    public static List<BoardGame> findBoardGamesByNumberOfPlayers(int players) {
+    public List<BoardGame> findBoardGamesByNumberOfPlayers(int players) {
         return games.values().stream().filter(game -> game instanceof BoardGame).map(game -> (BoardGame) game).filter(boardGame -> boardGame.getNumberOfPlayers() == players).toList();
     }
 

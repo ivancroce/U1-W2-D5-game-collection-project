@@ -2,6 +2,7 @@ package ivancroce;
 
 
 import ivancroce.entities.BoardGame;
+import ivancroce.entities.Game;
 import ivancroce.entities.GameCollection;
 import ivancroce.entities.VideoGame;
 import ivancroce.enums.Genre;
@@ -9,11 +10,12 @@ import ivancroce.enums.Platform;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
-    private static Scanner scanner = new Scanner(System.in);
-    private static GameCollection collection = new GameCollection();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final GameCollection collection = new GameCollection();
 
     public static void main(String[] args) {
 
@@ -22,54 +24,54 @@ public class Application {
 
         boolean running = true;
 
-        while(running) {
+        while (running) {
             showMenu();
 
             try {
-            System.out.println("Select an option: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+                System.out.println("Select an option: ");
+                int choice = Integer.parseInt(scanner.nextLine());
 
-            switch(choice) {
-                case 1:
-                    addNewGame();
-                    break;
-                case 2:
-                    // findById();
-                    System.out.println("test case 2");
-                    break;
-                case 3:
-                    // findByPriceLessThan();
-                    System.out.println("test case 3");
-                    break;
-                case 4:
-                    // findBoardGamesByNumberOfPlayers();
-                    System.out.println("test case 4");
-                    break;
-                case 5:
-                    // removeById();
-                    System.out.println("test case 5");
-                    break;
-                case 6:
-                    // updateGameById();
-                    System.out.println("test case 6");
-                    break;
-                case 7:
-                    // printStats();
-                    System.out.println("test case 7");
-                    break;
-                case 8:
-                    collection.printGameCollection();
-                    break;
-                case 0:
-                    // exit;
-                    running = false;
-                    break;
-                default:
-                    System.err.println("Invalid option. Please try again.");
-            }
-            } catch(NumberFormatException e) {
+                switch (choice) {
+                    case 1:
+                        addNewGame();
+                        break;
+                    case 2:
+                        System.out.println("Enter the ID of the game to find:");
+                        String id = scanner.nextLine();
+
+                        Game game = collection.findById(id);
+                        System.out.println("Game found: " + game);
+                        break;
+                    case 3:
+                        findGamesByPrice();
+                        break;
+                    case 4:
+                        findBoardGamesByPlayers();
+                        break;
+                    case 5:
+                        removeGameById();
+                        break;
+                    case 6:
+                        // updateGameById();
+                        System.out.println("test case 6");
+                        break;
+                    case 7:
+                        // printStats();
+                        System.out.println("test case 7");
+                        break;
+                    case 8:
+                        collection.printGameCollection();
+                        break;
+                    case 0:
+                        // exit;
+                        running = false;
+                        break;
+                    default:
+                        System.err.println("Invalid option. Please try again.");
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Error: you must enter a number. Please try again.");
-            } catch(Exception e) {
+            } catch (Exception e) {
                 // to catch all other Exceptions
                 System.out.println("Error: " + e.getMessage());
             }
@@ -78,6 +80,8 @@ public class Application {
         scanner.close();
         System.out.println("switch test done arrivederci 👋");
     }
+
+    // Methods
 
     private static void loadGames() {
         System.out.println("*****************************************");
@@ -90,7 +94,7 @@ public class Application {
             collection.addGame(new VideoGame("VG05", "Fifa 25", 2025, 69.99, Platform.PS5, Genre.SPORTS, 300));
             collection.addGame(new VideoGame("VG06", "Halo Infinite", 2021, 39.99, Platform.XBOX, Genre.FPS, 100));
             collection.addGame(new BoardGame("BG01", "Monopoly", 1935, 25.00, 5, 45));
-            collection.addGame(new BoardGame("BG02", "Battleship", 1967, 19.99,2, 30));
+            collection.addGame(new BoardGame("BG02", "Battleship", 1967, 19.99, 2, 30));
             collection.addGame(new BoardGame("BG03", "Risiko", 1957, 34.99, 3, 120));
         } catch (Exception e) {
             System.err.println("Error loading sample data: " + e.getMessage());
@@ -167,4 +171,45 @@ public class Application {
 
         System.out.println("Game added successfully to the collection!");
     }
+
+    private static void findGamesByPrice() {
+        System.out.println("Enter the maximum price (to find games with a price less than this value): ");
+        double maxPrice = Double.parseDouble(scanner.nextLine());
+
+        List<Game> results = collection.findByPriceLessThan(maxPrice);
+
+        if(results.isEmpty()){
+            System.out.println("No games found with a price less than " + maxPrice);
+        } else {
+           System.out.println("Games with a price less than " + maxPrice + ":");
+            results.forEach(System.out::println);
+     }
 }
+
+    private static void findBoardGamesByPlayers() {
+    System.out.println("Enter a number of players: ");
+    int num = Integer.parseInt(scanner.nextLine());
+
+    List<BoardGame> results = collection.findBoardGamesByNumberOfPlayers(num);
+
+    if (results.isEmpty()) {
+        System.out.println("No board games found for " + num + " players.");
+    } else {
+        System.out.println("Board games found for " + num + " players: ");
+        results.forEach(System.out::println);
+    }
+}
+
+    private static void removeGameById() {
+    System.out.println("Enter the ID of the game you want to remove: ");
+
+    String idToRemove = scanner.nextLine();
+
+    collection.removeById(idToRemove);
+    System.out.println("Game with ID '" + idToRemove + "' has been successfully removed.");
+}
+
+    private static updateGame() {
+        System.out.
+    }
+    }
