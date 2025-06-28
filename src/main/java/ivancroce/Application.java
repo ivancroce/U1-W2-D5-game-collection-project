@@ -56,14 +56,12 @@ public class Application {
                         System.out.println("test case 6");
                         break;
                     case 7:
-                        // printStats();
-                        System.out.println("test case 7");
+                        collection.printStats();
                         break;
                     case 8:
                         collection.printGameCollection();
                         break;
                     case 0:
-                        // exit;
                         running = false;
                         break;
                     default:
@@ -209,7 +207,4 @@ public class Application {
     System.out.println("Game with ID '" + idToRemove + "' has been successfully removed.");
 }
 
-    private static updateGame() {
-        System.out.
-    }
     }

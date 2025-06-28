@@ -66,6 +66,7 @@ public class GameCollection {
     public void printStats() {
         if(games.isEmpty()) {
             System.out.println("The Games Collection is empty. No statistics to show.");
+            return;
             }
 
         System.out.println("--- Games Collection Statistics ---");
@@ -87,7 +88,7 @@ public class GameCollection {
 
         double averagePrice = averagePriceOpt.orElse(0.0);
 
-        System.out.println("Average price of all items: €" + averagePrice);
+        System.out.println("Average price of all items: €" + String.format("%.2f", averagePrice));
     }
 
     // printGameCollection()
