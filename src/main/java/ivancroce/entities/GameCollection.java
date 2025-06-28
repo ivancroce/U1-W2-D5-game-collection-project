@@ -89,4 +89,14 @@ public class GameCollection {
 
         System.out.println("Average price of all items: €" + averagePrice);
     }
-}
+
+    // printGameCollection()
+    public void printGameCollection() {
+        if (games.isEmpty()) {
+            System.out.println("The collection is empty.");
+            return;
+        }
+        games.values().forEach(System.out::println);
+    }
+    }
+

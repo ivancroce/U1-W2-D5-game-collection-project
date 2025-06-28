@@ -44,7 +44,7 @@ public abstract class Game {
             throw new IllegalArgumentException("Year must be between 1900 and " + currentYear + ".");
         }
         this.year = year;
-        System.out.println(currentYear);
+       // System.out.println(currentYear);
     }
 
     public double getPrice() {

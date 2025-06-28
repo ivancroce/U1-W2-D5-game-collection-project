@@ -46,7 +46,7 @@ public class VideoGame extends Game {
 
     @Override
     public String toString() {
-        return "VideoGame{" +
+        return "VideoGame{" + super.toString() +
                 "platform=" + platform +
                 ", genre=" + genre +
                 ", playtimeHours=" + playtimeHours +
