@@ -52,8 +52,7 @@ public class Application {
                         removeGameById();
                         break;
                     case 6:
-                        // updateGameById();
-                        System.out.println("test case 6");
+                        updateGame();
                         break;
                     case 7:
                         collection.printStats();
@@ -76,11 +75,10 @@ public class Application {
         }
 
         scanner.close();
-        System.out.println("switch test done arrivederci 👋");
+        System.out.println("go touch some grass arrivederci 👋");
     }
 
     // Methods
-
     private static void loadGames() {
         System.out.println("*****************************************");
         System.out.println("--- Loading Games... ---");
@@ -207,4 +205,52 @@ public class Application {
     System.out.println("Game with ID '" + idToRemove + "' has been successfully removed.");
 }
 
+    private static void updateGame() {
+        System.out.println("Enter the ID of the game to update: ");
+        String idToUpdate = scanner.nextLine();
+
+        // if the ID doesn't exist, findById will throw the exception.
+        Game oldGame = collection.findById(idToUpdate);
+        System.out.println("Found game to update: " + oldGame.getTitle());
+
+        System.out.println("Enter new Title: ");
+        String newTitle = scanner.nextLine();
+
+        System.out.println("Enter new Publication Year: ");
+        int newYear = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter new Price: ");
+        double newPrice = Double.parseDouble(scanner.nextLine());
+
+        Game updatedGame;
+
+        // check if VideoGame or BoardGame
+        if(oldGame instanceof VideoGame) {
+            System.out.println("Updating a Video Game...");
+
+            System.out.println("Enter new Platform (Available: " + Arrays.toString(Platform.values()) + ": ");
+            Platform newPlatform = Platform.valueOf(scanner.nextLine().toUpperCase());
+
+            System.out.println("Enter new Genre (Available: " + Arrays.toString(Genre.values()) + ": ");
+            Genre newGenre = Genre.valueOf(scanner.nextLine().toUpperCase());
+
+            System.out.println("Enter new Playtime (hours): ");
+            int newPlaytimeHours = Integer.parseInt(scanner.nextLine());
+
+            updatedGame = new VideoGame(idToUpdate, newTitle, newYear, newPrice, newPlatform, newGenre, newPlaytimeHours);
+        } else {
+            System.out.println("Updating a Game Board...");
+
+            System.out.println("Enter new Number of players (2-10): ");
+            int newPlayers = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("Enter new Average playtime (minutes): ");
+            int newAveragePlayTime = Integer.parseInt(scanner.nextLine());
+
+            updatedGame = new BoardGame(idToUpdate, newTitle, newYear, newPrice, newPlayers, newAveragePlayTime);
+        }
+
+        collection.updateGameById(idToUpdate, updatedGame);
+        System.out.println("Game with ID '" + idToUpdate + "' has been successfully updated.");
+    }
     }

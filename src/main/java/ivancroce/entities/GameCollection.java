@@ -62,7 +62,7 @@ public class GameCollection {
         games.put(id, updatedGame);
         }
 
-        // 7. printStats()
+    // 7. printStats()
     public void printStats() {
         if(games.isEmpty()) {
             System.out.println("The Games Collection is empty. No statistics to show.");
