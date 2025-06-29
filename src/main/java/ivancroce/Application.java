@@ -75,7 +75,7 @@ public class Application {
         }
 
         scanner.close();
-        System.out.println("go touch some grass arrivederci 👋");
+        System.out.println("Go touch some grass...arrivederci! 😁👋");
     }
 
     // Methods
